@@ -9,12 +9,12 @@ namespace Problem_1._Generic_Box
         static void Main(string[] args)
         {
             var n = int.Parse(Console.ReadLine());
-            var stringList = new List<string>();
-            var box=new Box<string>();
+            var intList = new List<int>();
+            var box=new Box<int>();
             for (int i = 0; i < n; i++)
             {
-                var input = (Console.ReadLine());
-                stringList.Add(input);
+                var input = int.Parse(Console.ReadLine());
+                intList.Add(input);
             }
             var indexes = Console.ReadLine()
                 .Split(' ')
@@ -22,7 +22,7 @@ namespace Problem_1._Generic_Box
             var firstIndex = int.Parse(indexes[0]);
             var secondIndex = int.Parse(indexes[1]);
 
-            Console.WriteLine(box.SwapTwoElements(stringList, firstIndex, secondIndex));
+            Console.WriteLine(box.SwapTwoElements(intList, firstIndex, secondIndex));
 
         }
     }
