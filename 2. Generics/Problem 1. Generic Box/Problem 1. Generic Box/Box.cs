@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Text;
 
@@ -24,6 +25,21 @@ public class Box<T>
             sb.AppendLine($"{element.GetType().FullName}: {element}");
         }
         return sb.ToString().Trim();
+    }
+
+    public int CompareElements<T>(List<T> listForCompare, T element)
+        where T : IComparable<T>
+    {
+        var counter = 0;
+        foreach (var item in listForCompare)
+        {
+            if (item.CompareTo(element)>0)
+            {
+                counter++;
+            }
+        }
+        return counter;
+
     }
 
     public override string ToString()
