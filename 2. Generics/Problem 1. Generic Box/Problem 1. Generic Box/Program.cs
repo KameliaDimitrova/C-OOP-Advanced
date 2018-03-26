@@ -9,15 +9,15 @@ namespace Problem_1._Generic_Box
         static void Main(string[] args)
         {
             var n = int.Parse(Console.ReadLine());
-            var intList = new List<double>();
-            var box=new Box<double>();
+            var intList = new List<string>();
+            var box=new Box<string>();
             for (int i = 0; i < n; i++)
             {
-                var input = double.Parse(Console.ReadLine());
+                var input = (Console.ReadLine());
                 intList.Add(input);
             }
 
-            var element = double.Parse(Console.ReadLine());
+            var element = (Console.ReadLine());
          
             Console.WriteLine(box.CompareElements(intList, element));
 
