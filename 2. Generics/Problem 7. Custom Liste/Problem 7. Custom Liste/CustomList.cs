@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 public class CustomList<T>
     where T : IComparable
 {
     public T[] data { get; set; }
-    private int count = -1;
+    private int count;
     private int arrMaxSize => this.data.Length;
     public CustomList()
     {
@@ -15,7 +16,7 @@ public class CustomList<T>
 
     public void Add(T element)
     {
-        count++;
+        
         if (count >= arrMaxSize)
         {
             var newData = new T[arrMaxSize * 2];
@@ -23,7 +24,7 @@ public class CustomList<T>
             this.data = newData;
         }
         this.data[count] = element;
-
+        count++;
     }
 
     public T Remove(int index)
@@ -35,7 +36,8 @@ public class CustomList<T>
             this.data[i] = this.data[i + 1];
         }
         var array = data;
-        Array.Resize(ref array, data.Length - 1);
+        Array.Resize(ref array, count);
+        this.data = array;
         return elementForRemove;
     }
 
@@ -103,6 +105,31 @@ public class CustomList<T>
             }
         }
         return minElement;
+    }
+
+    public void Sort()
+    {
+        T tmp;
+        int min_key;
+
+        for (int j = 0; j < data.Length- 1; j++)
+        {
+            min_key = j;
+
+            for (int k = j + 1; k < data.Length; k++)
+            {
+                if (data[k] != null)
+                {
+                    if (data[k].CompareTo(data[min_key]) < 0)
+                    {
+                        min_key = k;
+                    }
+                }
+            }
+            tmp = data[min_key];
+            data[min_key] = data[j];
+            data[j] = tmp;
+        }
     }
 
     public override string ToString()

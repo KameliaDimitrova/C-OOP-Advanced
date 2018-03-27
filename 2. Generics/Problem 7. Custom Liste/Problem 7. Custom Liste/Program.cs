@@ -21,7 +21,7 @@ namespace Problem_7._Custom_List
                         break;
                     case "Remove":
                         var index = int.Parse(commandArgs[1]);
-                        Console.WriteLine(customList.Remove(index));
+                        customList.Remove(index);
                         break;
                     case "Contains":
                         element = commandArgs[1];
@@ -41,6 +41,9 @@ namespace Problem_7._Custom_List
                         break;
                     case "Min":
                         Console.WriteLine(customList.Min());
+                        break;
+                    case "Sort":
+                        customList.Sort();
                         break;
                     case "Print":
                         Console.WriteLine(customList.ToString());
