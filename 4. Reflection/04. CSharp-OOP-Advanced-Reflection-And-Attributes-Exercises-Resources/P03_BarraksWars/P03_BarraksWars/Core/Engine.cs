@@ -1,4 +1,8 @@
-﻿namespace _03BarracksFactory.Core
+﻿using System.Linq;
+using System.Reflection;
+using P03_BarraksWars.Core.Commands;
+
+namespace _03BarracksFactory.Core
 {
     using System;
     using Contracts;
@@ -36,39 +40,12 @@
         // TODO: refactor for Problem 4
         private string InterpredCommand(string[] data, string commandName)
         {
-            string result = string.Empty;
-            switch (commandName)
-            {
-                case "add":
-                    result = this.AddUnitCommand(data);
-                    break;
-                case "report":
-                    result = this.ReportCommand(data);
-                    break;
-                case "fight":
-                    Environment.Exit(0);
-                    break;
-                default:
-                    throw new InvalidOperationException("Invalid command!");
-            }
-            return result;
+            commandName=commandName.First().ToString().ToUpper() + commandName.Substring(1);
+            var assembly = Assembly.GetExecutingAssembly();
+            var currClass = assembly.GetTypes().First(x => x.Name.StartsWith(commandName));
+            var commandClass = ((Command)Activator.CreateInstance(currClass, data, repository, unitFactory)).Execute();
+            return commandClass;
         }
 
-
-        private string ReportCommand(string[] data)
-        {
-            string output = this.repository.Statistics;
-            return output;
-        }
-
-
-        private string AddUnitCommand(string[] data)
-        {
-            string unitType = data[1];
-            IUnit unitToAdd = this.unitFactory.CreateUnit(unitType);
-            this.repository.AddUnit(unitToAdd);
-            string output = unitType + " added!";
-            return output;
-        }
     }
 }
