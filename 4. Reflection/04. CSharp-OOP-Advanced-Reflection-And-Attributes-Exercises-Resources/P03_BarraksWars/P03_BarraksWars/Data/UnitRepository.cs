@@ -44,6 +44,8 @@
         {
             if(!amountOfUnits.ContainsKey(unitType))
                 throw new ArgumentException("No such units in repository.");
+            if(amountOfUnits[unitType]==0)
+                throw new ArgumentException("No such units in repository.");
             amountOfUnits[unitType]=amountOfUnits[unitType]-1;
           
         }

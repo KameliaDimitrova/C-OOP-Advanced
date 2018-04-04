@@ -14,7 +14,7 @@ namespace P03_BarraksWars.Core.Commands
         public override string Execute()
         {
             Repository.RemoveUnit(Data[1]);
-            string output = Data[1] + " retured!";
+            string output = Data[1] + " retired!";
             return output;
         }
     }
